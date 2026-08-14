@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class Solution {
+
+    static int longest(String s) {
+        int n = s.length();
+        int ans = 1;
+
+        for (int c = 0; c < n; c++) {
+
+            // Odd length
+            int l = c, r = c;
+            while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+                ans = Math.max(ans, r - l + 1);
+                l--;
+                r++;
+            }
+
+            // Even length
+            l = c;
+            r = c + 1;
+            while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+                ans = Math.max(ans, r - l + 1);
+                l--;
+                r++;
+            }
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        String s = sc.next();
+
+        String x = s + s;
+
+        for (int i = 0; i < n; i++) {
+            String rotation = x.substring(i, i + n);
+            System.out.println(longest(rotation));
+        }
+
+        sc.close();
+    }
+}
